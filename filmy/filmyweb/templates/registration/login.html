@@ -1,0 +1,22 @@
+{% extends 'filmyweb/glowny.html' %}
+{% load bootstrap %}
+
+{% block tytul %} Film form {% endblock %}
+
+{% block strona %}
+<i class="far fa-address-card"></i>
+
+
+
+    <div class="card" style="width: 26rem;">
+<!--      <img src="..." class="card-img-top" alt="...">-->
+      <div class="card-body">
+        <h5 class="card-title">Zaloguj sie</h5>
+        <form method="post">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-success">Zaloguj<i class="fas fa-sign-in-alt"></i></button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

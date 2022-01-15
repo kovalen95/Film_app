@@ -1,0 +1,52 @@
+{% extends 'filmyweb/glowny.html' %}
+
+{% block tytul %} Lista filmów {% endblock %}
+
+{% block strona %}
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+        <h1 class="display-4">Witam {{ user.username }}</h1>
+
+        <a href="{% url 'logout' %}" class="btn btn-success">Logout <i class="fas fa-sign-out-alt"></i></a>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-success">Login <i class="fas fa-sign-in-alt"></i></a>
+    {% endif %}
+
+    </div>
+
+    <hr>
+
+    <a href="{% url 'nowy_film' %}">Nowy film <i class="fas fa-plus-circle"></i></a>
+
+    {% if filmy|length == 0 %}
+    <h2> Brak filmow </h2>
+    {% else %}
+<!--        <h2>Ilosc filmow w bazie danych: {{ filmy|length }}</h2>-->
+        {% for film in filmy %}
+            <div class="card" style="width: 26rem;">
+<!--              <img src="..." class="card-img-top" alt="...">-->
+              <div class="card-body">
+                  <img src="/media/{{ film.plakat }}" class="film-plakat">
+                  <div class="row">
+                      <div class="col-9">
+                      <h5 class="card-title">{{ film }}</h5>
+                        </div>
+                      <div class="col-3">
+                          <a href="{% url 'edytuj_film' film.id %}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                          <a href="{% url 'usun_film' film.id %}" class="btn btn-primary"><i class="far fa-trash-alt"></i></a>
+                      </div>
+                      <div class="row">
+                         <p class="card-text">{{ film.opis }}</p>
+                      </div>
+
+                  </div>
+
+<!--                <a href="{% url 'edytuj_film' film.id %}" class="btn btn-primary"><i class="fas fa-edit"></i></a>-->
+<!--                <a href="{% url 'usun_film' film.id %}" class="btn btn-primary"><i class="far fa-trash-alt"></i></a>-->
+<!--                  <a href="{% url 'edytuj_film' film.id %}">Edytuj</a>-->
+<!--                  <a href="{% url 'usun_film' film.id %}">Usun</a>-->
+              </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
