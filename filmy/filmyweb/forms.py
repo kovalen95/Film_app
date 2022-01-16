@@ -13,6 +13,6 @@ class DodatkoweInfoForm(ModelForm):
         fields = ['czas_trwania', 'gatunek']
 
 class OcenaForm(ModelForm):
-    class MetaL
+    class Meta:
         model = Ocena
         fields = ['gwiazdki', 'recenzja']
